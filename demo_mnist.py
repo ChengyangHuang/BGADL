@@ -21,7 +21,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms, models
-from scipy.misc import imread
+from imageio import imread
 
 from scipy import linalg
 from torch.autograd import Variable
@@ -319,7 +319,7 @@ def acquire_points(argument, random_sample=False):
     global optimizer
     global model_scheduler
 
-    acquisition_iterations = 100
+    acquisition_iterations = 2
     dropout_iterations = 20  # [50, 100, 500, 1000]
     Queries = 100
     nb_samples = 100
