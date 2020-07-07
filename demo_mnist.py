@@ -319,7 +319,7 @@ def acquire_points(argument, random_sample=False):
     global optimizer
     global model_scheduler
 
-    acquisition_iterations = 2
+    acquisition_iterations = 100
     dropout_iterations = 20  # [50, 100, 500, 1000]
     Queries = 100
     nb_samples = 100
@@ -368,7 +368,8 @@ def acquire_points(argument, random_sample=False):
         test_acc_hist.append(test_acc)
         # gan.visualize_results(epochs)
 
-    np.save("./test_acc_VAEACGAN_MNIST" + argument + ".npy", np.asarray(test_acc_hist))
+    np.savetxt("./test_acc_VAEACGAN_MNIST" + argument + ".csv", np.asarray(test_acc_hist), delimiter=',')
+    # np.save("./test_acc_VAEACGAN_MNIST" + argument + ".npy", np.asarray(test_acc_hist))
 
 
 def bald_acquisition(dropout_iterations, pool_data_dropout, pool_target_dropout):
@@ -1012,9 +1013,9 @@ def main(argv):
     print ("acquiring points")
     acquire_points(str(argv[0]))
 
-    print ("Training again")
-    gan = VAEACGAN()
-    _, test_acc = gan.train()
+    # print ("Training again")
+    # gan = VAEACGAN()
+    # test_acc = gan.train()
 
     print("--- %s seconds ---" % (time.time() - start_time))
 
